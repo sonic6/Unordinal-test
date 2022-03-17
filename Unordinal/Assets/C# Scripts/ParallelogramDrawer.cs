@@ -14,6 +14,7 @@ namespace UnordinalTest
         private void OnDrawGizmos()
         {
             DrawParallelogram();
+            print("the area of the parallelogram is " + GetArea());
         }
 
         private void DrawParallelogram()
@@ -69,9 +70,14 @@ namespace UnordinalTest
             return new Vector2(centerX, centerY);
         }
 
-        void GetArea()
+        /// <summary>
+        /// Returns the area of the parallelogram 
+        /// </summary>
+        /// <returns></returns>
+        public float GetArea()
         {
-
+            float area = ((CornerC.x - CornerA.x) * (CornerB.y - CornerA.y)) - ((CornerC.y - CornerA.y) * (CornerB.x - CornerA.x));
+            return Mathf.Abs(area);
         }
 
 
