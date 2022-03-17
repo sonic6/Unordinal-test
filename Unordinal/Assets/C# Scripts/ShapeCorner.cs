@@ -1,12 +1,24 @@
 using UnityEngine;
 
-public class ShapeCorner : MonoBehaviour
+namespace UnordinalTest 
 {
-    [SerializeField] float size; //Sets the size of the gizmo 
-
-    private void OnDrawGizmos()
+    public class ShapeCorner : MonoBehaviour
     {
-        Gizmos.color = Color.blue; //Sets the color of the gizmo
-        Gizmos.DrawWireSphere(transform.position, size); //Creates a gizmo in the scene view
+        [SerializeField] float size; //Sets the size of the gizmo 
+
+        private void OnDrawGizmos()
+        {
+            DrawCorner();
+            print(name + " has coordinates " + transform.localPosition);
+        }
+
+        //Draws a blue shape corner using wire sphere gizmos
+        private void DrawCorner()
+        {
+            Gizmos.color = Color.blue; //Sets the color of the gizmo
+            Gizmos.DrawWireSphere(transform.position, size); //Creates a gizmo in the scene view
+        }
+
     }
 }
+
