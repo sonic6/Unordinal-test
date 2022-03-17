@@ -9,7 +9,7 @@ namespace UnordinalTest
         Vector2 CornerA;
         Vector2 CornerB;
         Vector2 CornerC;
-        Vector2 fourthCorner;
+        public Vector2 fourthCorner { get; private set; }
 
         private void OnDrawGizmos()
         {
@@ -22,22 +22,25 @@ namespace UnordinalTest
 
             //Draws a line from point 1 (index 2) to point 2 (index 0)
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(Corners[2].localPosition, Corners[0].localPosition);
+            Gizmos.DrawLine(CornerC, CornerA);
 
             //Draws a line from point 2 (index 0) to point 3 (index 1)
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(Corners[0].localPosition, Corners[1].localPosition);
+            Gizmos.DrawLine(CornerA, CornerB);
 
             //Draws a line from point 3 (index 1) to point 4 (fourthCorner)
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(Corners[1].localPosition, fourthCorner);
+            Gizmos.DrawLine(CornerB, fourthCorner);
 
             //Draws a line from point 4 (fourthCorner) to point 1 (index 2)
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(fourthCorner, Corners[2].localPosition);
+            Gizmos.DrawLine(fourthCorner, CornerC);
 
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(fourthCorner, .2f);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(FindCenter(), .2f);
 
             print("fourth corner has coordinates " + fourthCorner);
         }
@@ -53,6 +56,22 @@ namespace UnordinalTest
             Vector2 cornerD = new Vector2((CornerC.x + slopeAB.x), (CornerC.y + slopeAB.y));
 
             return cornerD;
+        }
+
+        /// <summary>
+        /// Finds the 2D space coordinates for the center point of the parallelogram
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 FindCenter()
+        {
+            float centerX = (CornerC.x + CornerB.x) / 2;
+            float centerY = (CornerC.y + CornerB.y) / 2;
+            return new Vector2(centerX, centerY);
+        }
+
+        void GetArea()
+        {
+
         }
 
 
