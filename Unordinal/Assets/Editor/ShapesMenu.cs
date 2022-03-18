@@ -3,12 +3,18 @@ using UnityEditor;
 using UnordinalTest;
 using System.Collections.Generic;
 
+
 public class ShapesMenu : EditorWindow
 {
     List<Transform> corners = new List<Transform>();
     Transform cornerA;
     Transform cornerB;
     Transform cornerC;
+
+    static ShapesMenu()
+    {
+        Debug.Log("Welcome to the UnordinalTest project by Ahmad. Please click Window > ShapesWindow to start");
+    }
 
     [MenuItem("Window/ShapesWindow")]
     public static void OpenWindow()
