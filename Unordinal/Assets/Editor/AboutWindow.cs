@@ -1,5 +1,5 @@
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
 public class AboutWindow : EditorWindow
 {
@@ -18,7 +18,8 @@ public class AboutWindow : EditorWindow
             "then click sumbit. This will cause those three gameobjects to be used as three corners of " +
             "a parallelogram that gets drawn in the scene window. " +
             "you could also drag in the prefab 'Corner' into the scene to use as a corner. The difference " +
-            "is that this prefab also displays a wireframe sphere at each corner";
+            "is that this prefab also displays a wireframe sphere at each corner\n\n" +
+            "Drag the 3 points that represent the corners of the parallelogram apart from each other in the desired shape";
 
         string toolComponents = "Please make sure that one gameobject in the scene has the components 'ParallelogramDrawer' and" +
             " 'CircleDrawer' before using the 'Submit points' button in the ShapesMenu";
@@ -27,7 +28,7 @@ public class AboutWindow : EditorWindow
         GUILayout.Label("This tool was made by Ahmad Al Shehabi", EditorStyles.helpBox);
         GUILayout.Space(10);
 
-        GUILayout.Label("About: " , EditorStyles.label);
+        GUILayout.Label("About: ", EditorStyles.label);
         GUILayout.Label(message, EditorStyles.helpBox);
         GUILayout.Space(10);
 
@@ -38,7 +39,7 @@ public class AboutWindow : EditorWindow
         GUILayout.Label("How to use: ", EditorStyles.label);
         GUILayout.Label(usage, EditorStyles.helpBox);
 
-        
-    }
-}
 
+    }
+
+}
