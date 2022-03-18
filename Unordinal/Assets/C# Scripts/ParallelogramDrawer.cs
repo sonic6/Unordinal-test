@@ -3,47 +3,62 @@ using UnityEngine;
 
 namespace UnordinalTest
 {
+    [RequireComponent(typeof(CircleDrawer))]
     public class ParallelogramDrawer : MonoBehaviour
     {
-        [SerializeField] List<Transform> Corners = new List<Transform>();
+        //The main ParallelogramDrawer in the scene
+        public static ParallelogramDrawer main;
+
+        [HideInInspector] public List<Transform> Corners = new List<Transform>();
         Vector2 CornerA;
         Vector2 CornerB;
         Vector2 CornerC;
         public Vector2 fourthCorner { get; private set; }
 
+        private void OnValidate()
+        {
+            main = this;
+            GetComponent<CircleDrawer>().parallelogramDrawer = main;
+        }
+
         private void OnDrawGizmos()
         {
             DrawParallelogram();
-            print("the area of the parallelogram is " + GetArea());
         }
 
         private void DrawParallelogram()
         {
-            fourthCorner = FindFourthCorner();
+            try
+            {
+                fourthCorner = FindFourthCorner();
 
-            //Draws a line from point 1 (index 2) to point 2 (index 0)
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(CornerC, CornerA);
+                //Draws a line from point 1 (index 2) to point 2 (index 0)
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(CornerC, CornerA);
 
-            //Draws a line from point 2 (index 0) to point 3 (index 1)
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(CornerA, CornerB);
+                //Draws a line from point 2 (index 0) to point 3 (index 1)
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(CornerA, CornerB);
 
-            //Draws a line from point 3 (index 1) to point 4 (fourthCorner)
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(CornerB, fourthCorner);
+                //Draws a line from point 3 (index 1) to point 4 (fourthCorner)
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(CornerB, fourthCorner);
 
-            //Draws a line from point 4 (fourthCorner) to point 1 (index 2)
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(fourthCorner, CornerC);
+                //Draws a line from point 4 (fourthCorner) to point 1 (index 2)
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(fourthCorner, CornerC);
 
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(fourthCorner, .2f);
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(fourthCorner, .2f);
 
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(FindCenter(), .2f);
-
-            print("fourth corner has coordinates " + fourthCorner);
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(FindCenter(), .2f);
+            }
+            catch {
+                Debug.Log("Click 'Window > ShapesWindow' to start using the shapes creator");
+                Debug.LogWarning("The parallelogram could not be drawn. Did you assign 3 points using the ShapesWindow?");
+            }
+            
         }
 
         //Finds the fourth point that the parallelogram is made of

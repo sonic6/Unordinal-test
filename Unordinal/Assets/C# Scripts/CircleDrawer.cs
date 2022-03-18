@@ -2,21 +2,19 @@ using UnityEngine;
 
 namespace UnordinalTest
 {
-    
     public class CircleDrawer : MonoBehaviour
     {
-        public ParallelogramDrawer par;
+        [HideInInspector] public ParallelogramDrawer parallelogramDrawer; //a reference to the main ParallelogramDrawer in the scene
 
         private void OnDrawGizmos()
         {
             DrawCircle();
-            CircleArea();
         }
 
         //Finds the radius of the circle that will be drawn using coordinates from a parallelogram
-        private float FindRadius()
+        private static float FindRadius()
         {
-            float parallelogramArea = par.GetArea();
+            float parallelogramArea = ParallelogramDrawer.main.GetArea();
             float radius = Mathf.Sqrt(parallelogramArea / Mathf.PI);
             return radius;
         }
@@ -31,14 +29,14 @@ namespace UnordinalTest
             float x = FindRadius() * Mathf.Cos(angle);
             float y = FindRadius() * Mathf.Sin(angle);
 
-            Vector2 pos = par.FindCenter() + new Vector2(x, y);
+            Vector2 pos = parallelogramDrawer.FindCenter() + new Vector2(x, y);
             Vector2 newPos;
             Vector2 lastPos = pos;
             for (angle = 0.1f; angle < Mathf.PI * 2; angle += 0.1f)
             {
                 x = FindRadius() * Mathf.Cos(angle);
                 y = FindRadius() * Mathf.Sin(angle);
-                newPos = par.FindCenter() + new Vector2(x, y);
+                newPos = parallelogramDrawer.FindCenter() + new Vector2(x, y);
                 Gizmos.DrawLine(pos, newPos);
                 pos = newPos;
             }
@@ -46,10 +44,10 @@ namespace UnordinalTest
         }
 
         //Finds the area of the drawn circle
-        void CircleArea()
+        public static float CircleArea()
         {
             float area = Mathf.PI * Mathf.Pow(FindRadius(), 2);
-            print("circle area is " + area);
+            return area;
         }
     }
     

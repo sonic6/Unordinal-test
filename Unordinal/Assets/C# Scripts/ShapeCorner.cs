@@ -9,7 +9,7 @@ namespace UnordinalTest
         private void OnDrawGizmos()
         {
             DrawCorner();
-            print(name + " has coordinates " + transform.localPosition);
+            //print(name + " has coordinates " + transform.localPosition);
         }
 
         //Draws a blue shape corner using wire sphere gizmos
@@ -18,6 +18,8 @@ namespace UnordinalTest
             Gizmos.color = Color.blue; //Sets the color of the gizmo
             Gizmos.DrawWireSphere(transform.position, size); //Creates a gizmo in the scene view
         }
+
+        
 
     }
 }
